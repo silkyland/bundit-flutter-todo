@@ -61,11 +61,14 @@ class _TodoListScreenState extends State<TodoListScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const TodoDetailScreen(todo: null),
-            ),
-          );
+              context,
+              MaterialPageRoute(
+                builder: (context) => const TodoDetailScreen(todo: null),
+              )).then((value) {
+            setState(() {
+              _todosFuture = _apiService.getAllTodos();
+            });
+          });
         },
         child: const Icon(Icons.add),
       ),
